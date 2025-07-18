@@ -1,3 +1,52 @@
+// วางโค้ดนี้ไว้บนสุดของไฟล์ Code.gs
+function doGet(e) {
+  // ใช้สำหรับทดสอบว่า API ทำงานหรือไม่
+  return ContentService.createTextOutput("API is running.").setMimeType(ContentService.MimeType.TEXT);
+}
+
+function doPost(e) {
+  try {
+    const body = JSON.parse(e.postData.contents);
+    const action = body.action;
+    const params = body.params;
+
+    let result;
+
+    // Router: ตรวจสอบ action ที่ส่งมา แล้วเรียกฟังก์ชันที่เหมาะสม
+    switch (action) {
+      case 'verifyUser':
+        result = verifyUser(params.username, params.password);
+        break;
+      case 'getPaginatedData':
+        result = getPaginatedData(params.user, params.page, params.pageSize, params.searchTerm, params.filterZone, params.filterStatus);
+        break;
+      case 'getOverallStats':
+        result = getOverallStats();
+        break;
+      case 'getScopedStats':
+        result = getScopedStats(params.user);
+        break;
+      case 'getFilterOptions':
+        result = getFilterOptions();
+        break;
+      case 'updateRecord':
+        result = updateRecord(params.data);
+        break;
+      // เพิ่ม case สำหรับฟังก์ชันอื่นๆ ตามต้องการ
+      default:
+        throw new Error("Invalid action specified.");
+    }
+
+    // ส่งผลลัพธ์กลับไปในรูปแบบ JSON
+    return ContentService.createTextOutput(JSON.stringify({ success: true, data: result }))
+      .setMimeType(ContentService.MimeType.JSON);
+
+  } catch (err) {
+    // กรณีเกิดข้อผิดพลาด ให้ส่ง error กลับไป
+    return ContentService.createTextOutput(JSON.stringify({ success: false, error: err.message }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
 // ===============================================================
 // CONFIGURATION
 // ===============================================================
