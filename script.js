@@ -383,11 +383,26 @@ function getPaginatedData(user, page = 1, pageSize = 50, searchTerm = "", filter
         const loginButton = document.getElementById('login-button');
         loginButton.disabled = true;
         loginButton.querySelector('.spinner-border').classList.remove('d-none');
-        google.script.run
-            .withSuccessHandler(onLoginSuccess)
-            .withFailureHandler(onLoginFailure)
-            .verifyUser(document.getElementById('username').value, document.getElementById('password').value);
+       const API_URL = "https://script.google.com/macros/s/AKfycby1qVAVpRVezFW4AXPdF5FltkDHrAmMoFx-RuZfutvOK1ou-GtE99pLzrp5fhiThEbm/exec"; // << วาง URL ที่คัดลอกมาตรงนี้
+
+async function callApi(action, params) {
+  try {
+    const response = await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action, params })
+    });
+    const result = await response.json();
+    if (!result.success) {
+      throw new Error(result.error);
     }
+    return result.data;
+  } catch (error) {
+    console.error('API Call Error:', error);
+    throw error; // ส่ง error ต่อไปให้ .catch() จัดการ
+  }
+}
+
 
     function onLoginSuccess(response) {
         if (response.success) {
