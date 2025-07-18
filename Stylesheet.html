@@ -1,0 +1,106 @@
+<style>
+  /* --- NEW: Sidebar Width Adjustment --- */
+  :root {
+    /* ลดความกว้างของ Sidebar จากเดิม 225px */
+    --sb-sidenav-width: 190px;
+  }
+
+  /* --- NEW LOGIN PAGE STYLES --- */
+  #login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(45deg, #1d2b4a, #4a0e4c);
+    background-size: cover;
+    background-position: center;
+  }
+  .login-form-container {
+    width: 100%;
+    max-width: 420px;
+    padding: 2.5rem;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 1rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  }
+  .login-form-container .form-control {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: none;
+  }
+  .login-form-container .form-control:focus {
+    background-color: white;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  }
+
+  /* --- GENERAL APP STYLES --- */
+  body {
+    background-color: #f8f9fa;
+  }
+  
+  /* --- NEW: Table Layout Adjustments --- */
+  .table-sm th, .table-sm td {
+    padding: 0.25rem 0.4rem; /* ลด Padding ในตารางเพื่อให้กระชับขึ้น */
+    vertical-align: middle;
+    font-size: 0.82rem; /* ลดขนาดฟอนต์เล็กน้อย */
+    white-space: nowrap; /* ป้องกันการขึ้นบรรทัดใหม่ในเซลล์ */
+  }
+  
+  /* กำหนดความกว้างขั้นต่ำให้คอลัมน์ที่สำคัญ */
+  #data-table th:nth-child(4), /* ชื่อ อปท. */
+  #data-table td:nth-child(4) {
+      min-width: 200px;
+      white-space: normal; /* อนุญาตให้ชื่อยาวขึ้นบรรทัดใหม่ได้ */
+  }
+  
+  #data-table th:nth-child(16), /* หมายเหตุ */
+  #data-table td:nth-child(16) {
+      min-width: 150px;
+      white-space: normal; /* อนุญาตให้หมายเหตุยาวขึ้นบรรทัดใหม่ได้ */
+  }
+
+  .notes-display {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 120px;
+    display: inline-block;
+  }
+  .sticky-top {
+    top: -1px;
+  }
+  th .form-select {
+    font-size: 0.8rem;
+    padding: 0.2rem 0.5rem;
+    background-color: #e9ecef;
+  }
+  .edit-notes-btn {
+    padding: .1rem .3rem;
+    font-size: .8rem;
+    line-height: 1.2;
+  }
+
+  /* For Stat Cards */
+  .card .border-left-primary { border-left: .25rem solid #4e73df !important; }
+  .card .border-left-success { border-left: .25rem solid #1cc88a !important; }
+  .card .border-left-info { border-left: .25rem solid #36b9cc !important; }
+  .card .border-left-warning { border-left: .25rem solid #f6c23e !important; }
+  .text-xs { font-size: .8rem; }
+  .text-gray-800 { color: #5a5c69 !important; }
+
+  /* For colResizable Library */
+  .CRZ .grip {
+    width: 5px;
+    height: 100%;
+    background: #f1f1f1;
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: col-resize;
+    z-index: 1;
+  }
+  .CRZ .dragging .grip {
+    background: #0d6efd;
+  }
+</style>
